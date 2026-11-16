@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "campus-data": {
+      "command": "python3",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-server/run_server.py"]
+    }
+  }
+}

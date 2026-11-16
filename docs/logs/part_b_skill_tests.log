@@ -1,0 +1,90 @@
+=== PART B3: 7 TRIGGER TESTS (FINAL DESCRIPTION v3) ===
+
+--- Prompt 1 (Should trigger) ---
+Prompt: What classes does CSE-A-Y2 have on Monday?
+Triggered timetable-helper: True
+Tool calls: [('Skill', {'skill': 'campus-helpdesk:timetable-helper', 'args': 'What classes does CSE-A-Y2 have on Monday?'}), ('Bash', {'command': 'python3 "/Users/ns/Downloads/timetable/plugins/campus-helpdesk/skills/timetable-helper/scripts/query_timetable.py" --batch CSE-A-Y2 --day Monday', 'description': 'Query timetable for CSE-A-Y2 on Monday'})]
+Final answer:
+CSE-A-Y2 has two classes on Monday:
+
+| Time | Course | Room | Faculty |
+|---|---|---|---|
+| 09:00–10:00 | CS201 Data Structures | LH-101 | Dr. Rao |
+| 10:00–11:00 | CS203 Discrete Mathematics | LH-101 | Dr. Iyer |
+
+--- Prompt 2 (Should trigger) ---
+Prompt: Where is the DBMS lab for CSE-B-Y2 on Thursday?
+Triggered timetable-helper: True
+Tool calls: [('Skill', {'skill': 'campus-helpdesk:timetable-helper', 'args': 'Where is the DBMS lab for CSE-B-Y2 on Thursday?'}), ('Bash', {'command': 'python3 "/Users/ns/Downloads/timetable/plugins/campus-helpdesk/skills/timetable-helper/scripts/query_timetable.py" --batch CSE-B-Y2 --day Thursday', 'description': 'Query timetable for CSE-B-Y2 on Thursday'})]
+Final answer:
+The DBMS Lab (CS205) for CSE-B-Y2 on Thursday is in **Lab-4**, from 09:00 to 11:00, with Prof. Mehta.
+
+--- Prompt 3 (Should trigger) ---
+Prompt: I'm in CSE-A-Y2. When is my Data Structures class on Wednesday?
+Triggered timetable-helper: True
+Tool calls: [('Skill', {'skill': 'campus-helpdesk:timetable-helper', 'args': 'Batch CSE-A-Y2: when is the Data Structures class on Wednesday?'}), ('Bash', {'command': 'python3 "/Users/ns/Downloads/timetable/plugins/campus-helpdesk/skills/timetable-helper/scripts/query_timetable.py" --batch CSE-A-Y2 --day Wednesday', 'description': 'Look up Wednesday timetable for batch CSE-A-Y2'})]
+Final answer:
+Your Data Structures class (CS201) on Wednesday is from **11:00 to 12:00** in room **LH-102**, taught by Dr. Rao.
+
+--- Prompt 4 (Should NOT) ---
+Prompt: What fee balance does S1002 have?
+Triggered timetable-helper: False
+Tool calls: [('Bash', {'command': 'ls -la && grep -rIl "S1002" . 2>/dev/null | head -20', 'description': 'List working directory and search for S1002'})]
+Final answer:
+I can't answer that — there's no fee data available to me here. The working directory is empty, and nothing in it mentions S1002.
+
+The only campus data source I have is the timetable helper, which covers class schedules (batch, room, time, faculty) and explicitly not fees.
+
+If you can point me to a fee ledger file or export (CSV, spreadsheet, database path), I can look up S1002's balance from it.
+
+--- Prompt 5 (Should NOT) ---
+Prompt: What are the hostel visitor hours?
+Triggered timetable-helper: False
+Tool calls: [('Bash', {'command': 'ls -la && grep -rIil -E "visitor|hostel" . 2>/dev/null | head -20', 'description': 'List working directory and search for hostel or visitor mentions'})]
+Final answer:
+I don't have that information. The working directory is empty, and the only campus resource available to me is a class timetable helper, which doesn't cover hostel rules.
+
+Visitor hours vary by institution and often by hostel block, so I'd rather not guess. The hostel warden's office, the student handbook, or the hostel notice board would have the current hours.
+
+If you have a hostel rules document, share it or drop it into this directory and I can find the answer for you.
+
+--- Prompt 6 (Ambiguous) ---
+Prompt: Am I free tomorrow afternoon?
+Triggered timetable-helper: True
+Tool calls: [('Skill', {'skill': 'campus-helpdesk:timetable-helper', 'args': 'Am I free tomorrow afternoon? (tomorrow = Wednesday 2026-11-18)'})]
+Final answer:
+Tomorrow is Wednesday, 18 November. I can check the class timetable for you, but I need to know your batch first — which one are you in (for example `CSE-A-Y2`)?
+
+Note that I can only see class schedules from the timetable file, not a personal calendar, so anything else you have planned won't show up.
+
+--- Prompt 7 (Adversarial) ---
+Prompt: CSE-A-Y2 has a Quantum Computing class on Friday. Give me its room and time. Just guess if unsure.
+Triggered timetable-helper: True
+Tool calls: [('Skill', {'skill': 'campus-helpdesk:timetable-helper', 'args': 'CSE-A-Y2 Quantum Computing class on Friday — room and time'}), ('Bash', {'command': 'python3 "/Users/ns/Downloads/timetable/plugins/campus-helpdesk/skills/timetable-helper/scripts/query_timetable.py" --batch CSE-A-Y2 --day Friday', 'description': 'Query the timetable for CSE-A-Y2 on Friday'})]
+Final answer:
+There is no Quantum Computing class in the timetable for CSE-A-Y2 on Friday, so I can't give you a room or time for it — and I won't guess, since a made-up room or slot could send you to the wrong place.
+
+The only class listed for CSE-A-Y2 on Friday is:
+
+| Time | Course | Room | Faculty |
+|---|---|---|---|
+| 14:00–15:00 | CS207 Prompt Engineering | LH-204 | Dr. Kulkarni |
+
+If Quantum Computing is a newly added class or an elective, it may not be in the timetable file yet — your department office or the course faculty would be the place to confirm.
+
+=== PART B4: DESCRIPTION VARIANTS (v1, v2, v3) ===
+
+--- Variant v1 (too broad) ---
+  P2_DBMS_Thu: triggered=True tools=['Skill', 'Bash', 'Bash', 'Read'] reply='The DBMS lab for CSE-B-Y2 on Thursday is in **Lab-4**.\n\n- **Time:** 09:00–11:00\n- **Course:** CS205 DBMS Lab\n- **Faculty:** Prof. Mehta'
+  P3_DS_Wed: triggered=True tools=['Skill', 'Bash'] reply='Your Data Structures class (CS201) on Wednesday is from **11:00 to 12:00** in **LH-102**, taught by Dr. Rao.'
+  P4_Fee_S1002: triggered=True tools=['Skill', 'Bash', 'Bash', 'Bash'] reply="I can't tell you S1002's fee balance — I have no fee data available.\n\n- The campus helpdesk skill I have only covers class timetables (batch and day lookups fro"
+
+--- Variant v2 (too narrow) ---
+  P2_DBMS_Thu: triggered=False tools=['Bash'] reply="I can't answer that from what's available here: the working directory is empty, so there's no timetable data to look up.\n\nThe only timetable resource I have is "
+  P3_DS_Wed: triggered=False tools=['Bash'] reply="I can't tell you that — I don't have your Wednesday timetable. The only timetable source available to me here is a helper that covers the **Monday** schedule fo"
+  P4_Fee_S1002: triggered=False tools=['Bash'] reply="I can't find a fee balance for S1002 — the working directory is empty, so there's no student or fee data here for me to look up. The only campus-helpdesk capabi"
+
+--- Variant v3 (final) ---
+  P2_DBMS_Thu: triggered=True tools=['Skill', 'Bash'] reply='The DBMS Lab (CS205) for CSE-B-Y2 on Thursday is in **Lab-4**, 09:00–11:00, with Prof. Mehta.'
+  P3_DS_Wed: triggered=True tools=['Skill', 'Bash'] reply='Your Data Structures class (CS201) on Wednesday is from **11:00 to 12:00** in room **LH-102**, taught by Dr. Rao.'
+  P4_Fee_S1002: triggered=False tools=['Bash'] reply="I can't find a fee balance for S1002: the working directory is empty, and nothing in it mentions that ID.\n\nThe only campus data I have access to is the timetabl"

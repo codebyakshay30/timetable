@@ -1,0 +1,5 @@
+{
+  "S1001": {"name": "Mock Student A", "total": 85000, "paid": 85000, "due_date": null},
+  "S1002": {"name": "Mock Student B", "total": 85000, "paid": 42500, "due_date": "2026-12-05"},
+  "S1003": {"name": "Mock Student C", "total": 85000, "paid": 0,     "due_date": "2026-11-30"}
+}

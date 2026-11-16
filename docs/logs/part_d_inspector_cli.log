@@ -1,0 +1,141 @@
+=== 1. tools/list ===
+campus-data MCP server starting on stdio
+[11/17/26 00:54:19] INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+{
+  "tools": [
+    {
+      "name": "get_timetable",
+      "description": "Return the classes for ONE batch on ONE weekday from the campus timetable.\n\nArgs:\n    batch: Exact batch id such as 'CSE-A-Y2', 'CSE-B-Y2' or 'ECE-A-Y2'.\n    day: Weekday as 'Mon', 'Tue', 'Wed', 'Thu', 'Fri' or 'Sat'.\nReturns one line per class (time | course | room | faculty), or\n'No classes found' when the batch has none that day. Read-only. Never\nreturns data for other batches. Invalid batch or day raises an error.\n",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "batch": {
+            "title": "Batch",
+            "type": "string"
+          },
+          "day": {
+            "title": "Day",
+            "type": "string"
+          }
+        },
+        "required": [
+          "batch",
+          "day"
+        ],
+        "title": "get_timetableArguments"
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_timetableOutput"
+      }
+    },
+    {
+      "name": "get_fee_status",
+      "description": "Return the fee status of ONE student by id (mock data only).\n\nArgs:\n    student_id: Id in the form 'S' followed by 4 digits, e.g. 'S1002'.\nReturns total, paid, balance, due_date and status (PAID or PENDING).\nRead-only: this tool cannot change, waive or record payments.\n",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "student_id": {
+            "title": "Student Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "student_id"
+        ],
+        "title": "get_fee_statusArguments"
+      }
+    }
+  ]
+}
+
+=== 2. tools/call get_timetable(CSE-A-Y2, Mon) ===
+campus-data MCP server starting on stdio
+[11/17/26 00:54:20] INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "09:00-10:00 | CS201 Data Structures | LH-101 | Dr. Rao\n10:00-11:00 | CS203 Discrete Mathematics | LH-101 | Dr. Iyer"
+    }
+  ],
+  "structuredContent": {
+    "result": "09:00-10:00 | CS201 Data Structures | LH-101 | Dr. Rao\n10:00-11:00 | CS203 Discrete Mathematics | LH-101 | Dr. Iyer"
+  },
+  "isError": false
+}
+
+=== 3. tools/call get_fee_status(S1002) ===
+campus-data MCP server starting on stdio
+[11/17/26 00:54:21] INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"student_id\": \"S1002\",\n  \"total\": 85000,\n  \"paid\": 42500,\n  \"balance\": 42500,\n  \"due_date\": \"2026-12-05\",\n  \"status\": \"PENDING\"\n}"
+    }
+  ],
+  "isError": false
+}
+
+=== 4. tools/call get_fee_status(bad input) ===
+campus-data MCP server starting on stdio
+[11/17/26 00:54:22] INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Error executing tool get_fee_status: student_id must look like S1001 (letter S + 4 digits)"
+    }
+  ],
+  "isError": true
+}
+{"error":{"code":"tool_is_error","message":"Tool 'get_fee_status' returned isError:true."}}
+
+=== 5. resources/list ===
+campus-data MCP server starting on stdio
+[11/17/26 00:54:23] INFO     Processing request of type            server.py:733
+                             ListResourcesRequest                               
+{
+  "resources": [
+    {
+      "name": "hostel_rules_doc",
+      "uri": "hostel://rules",
+      "description": "The hostel rules document (mock).",
+      "mimeType": "text/markdown"
+    }
+  ]
+}
+
+=== 6. resources/read hostel://rules ===
+campus-data MCP server starting on stdio
+[11/17/26 00:54:24] INFO     Processing request of type            server.py:733
+                             ReadResourceRequest                                
+{
+  "contents": [
+    {
+      "uri": "hostel://rules",
+      "mimeType": "text/markdown",
+      "text": "# Hostel Rules (MOCK DOCUMENT - not a real policy)\n\n1. Entry gate closes at 22:00. Late entry needs a warden-signed slip.\n2. Visitors are allowed in the common room only, 10:00-18:00.\n3. Cooking appliances (heaters, induction plates) are not permitted in rooms.\n4. Quiet hours: 23:00-06:00.\n5. Room inspections happen on the first Saturday of each month.\n"
+    }
+  ]
+}

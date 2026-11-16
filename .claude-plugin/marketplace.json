@@ -1,0 +1,12 @@
+{
+  "name": "nimbus-campus-marketplace",
+  "description": "Nimbus Labs Campus Helpdesk Agent plugin marketplace (mock data only).",
+  "owner": { "name": "Akshay Sharma" },
+  "plugins": [
+    {
+      "name": "campus-helpdesk",
+      "source": "./plugins/campus-helpdesk",
+      "description": "Campus Helpdesk Agent: timetable skill, slash command, protected-folder hook and MCP server config (mock data only)."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+$ npm view @nimbus/mcp-skill-bridge
+npm error code E404
+npm error 404 Not Found - GET https://registry.npmjs.org/@nimbus%2fmcp-skill-bridge - Not found
+npm error 404
+npm error 404  The requested resource '@nimbus/mcp-skill-bridge@*' could not be found or you do not have permission to access it.
+npm error 404
+npm error 404 Note that you can also install from a
+npm error 404 tarball, folder, http url, or git url.
+npm error A complete log of this run can be found in: /Users/ns/.npm/_logs/2026-11-16T19_23_27_815Z-debug-0.log
+
+$ npm view mcp-skill-bridge
+
+mcp-skill-bridge@0.0.3 | Proprietary | deps: 7 | versions: 3
+[English](./README.md)
+
+bin: mcp-skill-bridge
+
+dist
+.tarball: https://registry.npmjs.org/mcp-skill-bridge/-/mcp-skill-bridge-0.0.3.tgz
+.shasum: f49367937706390047bf5c211d9fbff49841c316
+.integrity: sha512-GbkSbyFJVMcDUZ+aGW//z7CddqloPTxFfKsBuNCcA6k2cd2BJZ/MHCHbyLjPvuyC6N7HC+q17QXIl/sep7/V5A==
+.unpackedSize: 43.3 kB
+
+dependencies:
+@cfworker/json-schema: ^4.1.1, @hono/node-server: ^1.19.14, @modelcontextprotocol/hono: ^2.0.0-alpha.2, @modelcontextprotocol/server: ^2.0.0-alpha.2, hono: ^4.12.14, yaml: ^2.8.3, zod: ^4.3.6
+
+maintainers:
+- sunwu51 <sunwu51@126.com>
+
+dist-tags:
+latest: 0.0.3
+
+published 4 months ago by sunwu51 <sunwu51@126.com>

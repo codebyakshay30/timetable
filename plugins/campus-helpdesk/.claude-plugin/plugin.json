@@ -1,0 +1,7 @@
+{
+  "name": "campus-helpdesk",
+  "description": "Campus Helpdesk Agent toolkit: timetable Skill, /timetable-today command, protected-folder hook, MCP server config. Mock data only.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": { "name": "Akshay Sharma" }
+}

@@ -1,0 +1,59 @@
+== create worktrees
+Preparing worktree (new branch 'feature/skill-tests')
+HEAD is now at e2a919d Initial commit: plugin, skill, MCP server
+Preparing worktree (new branch 'feature/mcp-server')
+HEAD is now at e2a919d Initial commit: plugin, skill, MCP server
+Preparing worktree (new branch 'bugfix/hook-path')
+HEAD is now at e2a919d Initial commit: plugin, skill, MCP server
+== worktree list
+/private/tmp/worktree-sim/repo           e2a919d [main]
+/private/tmp/worktree-sim/wt/hook-path   e2a919d [bugfix/hook-path]
+/private/tmp/worktree-sim/wt/mcp-server  e2a919d [feature/mcp-server]
+/private/tmp/worktree-sim/wt/skill-tests e2a919d [feature/skill-tests]
+== same branch twice is refused (default safeguard)
+Preparing worktree (checking out 'feature/skill-tests')
+fatal: 'feature/skill-tests' is already used by worktree at '/private/tmp/worktree-sim/wt/skill-tests'
+== a change in each worktree
+== merge skill-tests into main, then mcp-server (conflict on docs/STATUS.md)
+Merge made by the 'ort' strategy.
+ docs/SKILL_TESTS.md | 2 ++
+ docs/STATUS.md      | 1 +
+ 2 files changed, 3 insertions(+)
+ create mode 100644 docs/SKILL_TESTS.md
+Auto-merging docs/STATUS.md
+CONFLICT (content): Merge conflict in docs/STATUS.md
+Automatic merge failed; fix conflicts and then commit the result.
+-- conflict state:
+UU docs/STATUS.md
+-- conflict markers in docs/STATUS.md:
+The project contains mock data and development code. A component is considered verified only after it has been executed and its actual output has been recorded.
+
+Do not mark pending verification tasks as completed without evidence.
+<<<<<<< HEAD
+Status: skill tests written
+=======
+Status: mcp server done
+>>>>>>> feature/mcp-server
+Merge made by the 'ort' strategy.
+ plugins/campus-helpdesk/hooks/scripts/block_protected.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+== history graph
+*   7b10126 (HEAD -> main) Merge bugfix/hook-path
+|\  
+| * 2104b1c (bugfix/hook-path) hook-path: also protect secrets folder
+* |   9d2148f Merge feature/mcp-server (resolved STATUS.md conflict)
+|\ \  
+| * | 4082184 (feature/mcp-server) mcp-server: update status
+| |/  
+* |   664a83e Merge feature/skill-tests
+|\ \  
+| |/  
+|/|   
+| * 24e2b77 (feature/skill-tests) skill-tests: add test log and status
+|/  
+* e2a919d Initial commit: plugin, skill, MCP server
+== cleanup
+/private/tmp/worktree-sim/repo 7b10126 [main]
+Deleted branch feature/skill-tests (was 24e2b77).
+Deleted branch feature/mcp-server (was 4082184).
+Deleted branch bugfix/hook-path (was 2104b1c).

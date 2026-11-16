@@ -1,0 +1,11 @@
+batch,day,start,end,course_code,course_name,room,faculty
+CSE-A-Y2,Mon,09:00,10:00,CS201,Data Structures,LH-101,Dr. Rao
+CSE-A-Y2,Mon,10:00,11:00,CS203,Discrete Mathematics,LH-101,Dr. Iyer
+CSE-A-Y2,Tue,09:00,11:00,CS205,DBMS Lab,Lab-3,Prof. Mehta
+CSE-A-Y2,Wed,11:00,12:00,CS201,Data Structures,LH-102,Dr. Rao
+CSE-A-Y2,Fri,14:00,15:00,CS207,Prompt Engineering,LH-204,Dr. Kulkarni
+CSE-B-Y2,Mon,09:00,10:00,CS203,Discrete Mathematics,LH-103,Dr. Iyer
+CSE-B-Y2,Tue,10:00,11:00,CS201,Data Structures,LH-103,Dr. Rao
+CSE-B-Y2,Thu,09:00,11:00,CS205,DBMS Lab,Lab-4,Prof. Mehta
+ECE-A-Y2,Mon,11:00,12:00,EC201,Signals and Systems,LH-301,Dr. Nair
+ECE-A-Y2,Wed,09:00,10:00,EC203,Digital Electronics,LH-301,Dr. Shah

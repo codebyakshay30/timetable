@@ -1,0 +1,183 @@
+$ claude plugin validate .
+Validating marketplace manifest: /Users/ns/Downloads/timetable/.claude-plugin/marketplace.json
+
+✔ Validation passed
+[exit=0]
+
+$ claude plugin validate ./plugins/campus-helpdesk
+Validating plugin manifest: /Users/ns/Downloads/timetable/plugins/campus-helpdesk/.claude-plugin/plugin.json
+
+Plugin directory checks for /Users/ns/Downloads/timetable/plugins/campus-helpdesk. The plugin directory is the catalog that plugins are submitted to; this is a subset of what it runs.
+
+⚠ Found 1 plugin directory warning:
+
+  ❯ .claude-plugin/plugin.json icon: No icon (ICON_MISSING). No icon found in the plugin. The validator looked for `icon` in plugin.json and for a file at .claude-plugin/icon.png or .svg, assets/icon.png or .svg, or a similar path.
+    Fix: Add a square PNG to the plugin folder at .claude-plugin/icon.png, or set `icon` in plugin.json to the path of a square PNG or JPEG in the plugin: 512 to 2048 px on each side, under 2 MB. SVG and WebP are not accepted. That file may become the listing icon only once: the first time the plugin is saved or submitted in the developer portal. Adding or changing it later does not change the icon.
+
+These plugin directory checks do not change the result below.
+
+The directory also runs a safety scan and a policy review that this command does not.
+
+✔ Validation passed
+[exit=0]
+
+$ claude plugin marketplace add /Users/ns/Downloads/timetable
+Adding marketplace…✔ Successfully added marketplace: nimbus-campus-marketplace (declared in user settings)
+[exit=0]
+
+$ claude plugin install campus-helpdesk@nimbus-campus-marketplace
+Installing plugin "campus-helpdesk@nimbus-campus-marketplace"...✔ Successfully installed plugin: campus-helpdesk@nimbus-campus-marketplace (scope: user)
+[exit=0]
+
+$ claude plugin list
+Installed plugins:
+
+  ❯ campus-helpdesk@nimbus-campus-marketplace
+    Version: 1.0.0
+    Read from: /Users/ns/Downloads/timetable/plugins/campus-helpdesk
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ clangd-lsp@claude-plugins-official
+    Version: 1.0.0
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ figma@claude-plugins-official
+    Version: 2.2.157
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ firebase@claude-plugins-official
+    Version: e0ab6e51219e
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ frontend-design@claude-plugins-official
+    Version: 1.1.1
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ github@claude-plugins-official
+    Version: e0ab6e51219e
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ mcpmarket-me@mcpmarket-me
+    Version: 0.1.0
+    Read from: /Users/ns/.claude/plugins/mcpmarket-me
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ vercel@claude-plugins-official
+    Version: 0.50.0
+    Scope: user
+    Status: ✔ enabled
+    Note: The packages it lists are not installed. Run `claude plugin update vercel@claude-plugins-official` to install them
+
+Synced from claude.ai:
+
+  ❯ asd-ste100@synced
+    Version: unknown
+    Path: /Users/ns/.claude/plugins/synced/5877526d-40b5-4cd4-8978-b7fd73cf480d_0f569625-96cf-4671-a39e-fc16baa06f31/asd-ste100
+    Status: ✔ loaded
+
+Skills-directory plugins (.claude/skills/*):
+
+  ❯ humanizer@skills-dir
+    Version: 3.0.0
+    Scope: user
+    Path: ~/.claude/skills/humanizer
+    Status: ✔ loaded
+[exit=0]
+
+=== Live Claude session: Slash command /campus-helpdesk:timetable-today CSE-A-Y2 Mon ===
+Loaded plugin: [{'name': 'campus-helpdesk', 'path': '/Users/ns/Downloads/timetable/plugins/campus-helpdesk', 'source': 'campus-helpdesk@nimbus-campus-marketplace', 'version': '1.0.0'}]
+MCP server status: [{'name': 'plugin:campus-helpdesk:campus-data', 'status': 'connected', 'source': 'plugin'}]
+Tool call: Bash {'command': 'python3 "/Users/ns/Downloads/timetable/plugins/campus-helpdesk/skills/timetable-today/../timetable-helper/scripts/query_timetable.py" --batch CSE-A-Y2 --day Mon', 'description': 'Query timetable for CSE-A-Y2 on Monday'}
+Final response:
+**CSE-A-Y2 — Monday**
+
+| Time | Course | Room | Faculty |
+|---|---|---|---|
+| 09:00–10:00 | CS201 Data Structures | LH-101 | Dr. Rao |
+| 10:00–11:00 | CS203 Discrete Mathematics | LH-101 | Dr. Iyer |
+
+=== Live Claude session: MCP tool query: What fee balance does S1002 have? ===
+Loaded plugin: [{'name': 'campus-helpdesk', 'path': '/Users/ns/Downloads/timetable/plugins/campus-helpdesk', 'source': 'campus-helpdesk@nimbus-campus-marketplace', 'version': '1.0.0'}]
+MCP server status: [{'name': 'plugin:campus-helpdesk:campus-data', 'status': 'connected', 'source': 'plugin'}]
+Tool call: ToolSearch {'query': 'select:mcp__plugin_campus-helpdesk_campus-data__get_fee_status', 'max_results': 5}
+Tool call: mcp__plugin_campus-helpdesk_campus-data__get_fee_status {'student_id': 'S1002'}
+Final response:
+S1002 has an outstanding fee balance of **42,500**, with status **PENDING**.
+
+- Total fee: 85,000
+- Paid so far: 42,500
+- Due date: 2026-12-05
+
+The campus-data server returns mock data and gives no currency for these amounts.
+
+$ claude plugin uninstall campus-helpdesk@nimbus-campus-marketplace
+✔ Successfully uninstalled plugin: campus-helpdesk (scope: user)
+[exit=0]
+
+$ claude plugin marketplace remove nimbus-campus-marketplace
+✔ Successfully removed marketplace: nimbus-campus-marketplace
+[exit=0]
+
+$ claude plugin list
+Installed plugins:
+
+  ❯ clangd-lsp@claude-plugins-official
+    Version: 1.0.0
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ figma@claude-plugins-official
+    Version: 2.2.157
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ firebase@claude-plugins-official
+    Version: e0ab6e51219e
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ frontend-design@claude-plugins-official
+    Version: 1.1.1
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ github@claude-plugins-official
+    Version: e0ab6e51219e
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ mcpmarket-me@mcpmarket-me
+    Version: 0.1.0
+    Read from: /Users/ns/.claude/plugins/mcpmarket-me
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ vercel@claude-plugins-official
+    Version: 0.50.0
+    Scope: user
+    Status: ✔ enabled
+    Note: The packages it lists are not installed. Run `claude plugin update vercel@claude-plugins-official` to install them
+
+Synced from claude.ai:
+
+  ❯ asd-ste100@synced
+    Version: unknown
+    Path: /Users/ns/.claude/plugins/synced/5877526d-40b5-4cd4-8978-b7fd73cf480d_0f569625-96cf-4671-a39e-fc16baa06f31/asd-ste100
+    Status: ✔ loaded
+
+Skills-directory plugins (.claude/skills/*):
+
+  ❯ humanizer@skills-dir
+    Version: 3.0.0
+    Scope: user
+    Path: ~/.claude/skills/humanizer
+    Status: ✔ loaded
+[exit=0]
+

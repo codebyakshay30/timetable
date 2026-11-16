@@ -1,0 +1,6 @@
+[protected unix path] rc=2 stderr='Blocked: /repo/protected/secret.txt is inside a protected location.'
+[path traversal to protected] rc=2 stderr='Blocked: /repo/src/../protected/a.txt is inside a protected location.'
+[protected windows path] rc=2 stderr='Blocked: C:\\repo\\protected\\a.txt is inside a protected location.'
+[.env file write] rc=2 stderr='Blocked: /repo/.env is inside a protected location.'
+[normal docs file (allowed)] rc=0 stderr=''
+[malformed json (fail-closed)] rc=2 stderr='Blocked: hook could not parse its input.'
